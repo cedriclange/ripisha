@@ -18,6 +18,7 @@ function get_message()
     else
     {
         $error = 'The from variable was not set';
+        
     }
     /**
      * Get the SMS aka the message sent.
