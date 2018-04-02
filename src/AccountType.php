@@ -13,7 +13,9 @@ class AccountType
 {
     public function _construct()
     {
-        $this->accounts = ArrayColelction();
+        $this->accounts = new ArrayColelction();
+        $this->transactions = new ArrayCollection();
+
     }
     /**@ORM\Id @ORM\Column(type="integer") ORM\GeneratedValue */
     private $id;
@@ -23,6 +25,10 @@ class AccountType
      * @ORM\OneToMany(targetEntity=src\Base\Account, mappedBy="type")
      */
     private $accounts;
+    /**
+     * @ORM\OneToMany(targetEntity=src\Base\Transaction, mappedBy="transact_id")
+     */
+    private $transactions;
 
 
 

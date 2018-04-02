@@ -41,6 +41,8 @@ class Account
      * @ORM\OneToMany(targetEntity=src\Base\Account, mappedBy="transact_id")
      */
     private $transactions;
+    /**@ORM\Column(type="decimal") */
+    private $balance;
 
     /**
      * Get the value of id
@@ -131,21 +133,31 @@ class Account
     }
 
     /**
-     * Get the value of transactions
+     * @return Collection/Transaction[]
      */ 
     public function getTransactions()
     {
         return $this->transactions;
     }
 
+    
+
     /**
-     * Set the value of transactions
+     * Get the value of balance
+     */ 
+    public function getBalance()
+    {
+        return $this->balance;
+    }
+
+    /**
+     * Set the value of balance
      *
      * @return  self
      */ 
-    public function setTransactions(Transaction $transactions)
+    public function setBalance($balance)
     {
-        $this->transactions = $transactions;
+        $this->balance = $balance;
 
         return $this;
     }
