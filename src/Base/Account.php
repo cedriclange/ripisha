@@ -1,15 +1,46 @@
 <?php
-namespace Lemondrop\Ripisha\Base;
+namespace src\Base;
 
+use Doctrine\ORM\Annotation as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use src\Base\Transaction;
+/**
+ * @ORM\Entity @ORM\Table(name="account_tbl")
+ */
 class Account
 {
+    public function _construct()
+    {
+        $this->transactions = new ArrayCollection();
+    }  
     /**ACCOUNT PROPERTIES */
+    /**
+     * @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue
+     */
     private $id;
+    /**
+     * @ORM\Column(type="string")
+     */
     private $name;
+    /**
+     * @ORM\Column(type="string")
+     */
     private $identifier;
-    private $accountType;
-    private $accountCurrency;
+    /**
+     * @ORM\ManyToOne(targetEntity="src\Base\AccountType", inversedBy="accounts")
+     * @ORM\JoinColumn(name="accountype")
+     */
+    private $type;
+    /**
+     * @ORM\Column(type="string")
+     */
     private $deviceID;
+
+     /**
+     * @ORM\OneToMany(targetEntity=src\Base\Account, mappedBy="transact_id")
+     */
+    private $transactions;
 
     /**
      * Get the value of id
@@ -62,9 +93,9 @@ class Account
     /**
      * Get the value of accountType
      */ 
-    public function getAccountType()
+    public function type()
     {
-        return $this->accountType;
+        return $this->type;
     }
 
     /**
@@ -72,29 +103,9 @@ class Account
      *
      * @return  self
      */ 
-    public function setAccountType($accountType)
+    public function setAccountType(AccountType $type)
     {
-        $this->accountType = $accountType;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of accountCurrency
-     */ 
-    public function getAccountCurrency()
-    {
-        return $this->accountCurrency;
-    }
-
-    /**
-     * Set the value of accountCurrency
-     *
-     * @return  self
-     */ 
-    public function setAccountCurrency($accountCurrency)
-    {
-        $this->accountCurrency = $accountCurrency;
+        $this->type = $type;
 
         return $this;
     }
@@ -115,6 +126,26 @@ class Account
     public function setDeviceID($deviceID)
     {
         $this->deviceID = $deviceID;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of transactions
+     */ 
+    public function getTransactions()
+    {
+        return $this->transactions;
+    }
+
+    /**
+     * Set the value of transactions
+     *
+     * @return  self
+     */ 
+    public function setTransactions(Transaction $transactions)
+    {
+        $this->transactions = $transactions;
 
         return $this;
     }
