@@ -1,13 +1,14 @@
 <?php
 
-namespace src\Base;
 
 use Doctrine\ORM\Annotation as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use src\Account;
+use src\Transaction;
 
 /**
- * @ORM\Entity @ORM\Table(name="accountType_tbl")
+ * @Entity @Table(name="accountType_tbl")
  */
 class AccountType
 {
@@ -17,16 +18,20 @@ class AccountType
         $this->transactions = new ArrayCollection();
 
     }
-    /**@ORM\Id @ORM\Column(type="integer") ORM\GeneratedValue */
+    /**
+     * @Id @Column(type="integer") @GeneratedValue 
+     */
     private $id;
-    /**@ORM\Column(type="string") */
+    /** 
+     * @Column(type="string") 
+     */
     private $name;
     /**
-     * @ORM\OneToMany(targetEntity=src\Base\Account, mappedBy="type")
+     * @OneToMany(targetEntity="Account", mappedBy="type")
      */
     private $accounts;
     /**
-     * @ORM\OneToMany(targetEntity=src\Base\Transaction, mappedBy="transact_id")
+     * @OneToMany(targetEntity="Transaction", mappedBy="transact_id")
      */
     private $transactions;
 

@@ -1,12 +1,12 @@
 <?php
     // bootstrap.php
+    require_once "vendor/autoload.php";
     use Doctrine\ORM\Tools\Setup;
     use Doctrine\ORM\EntityManager;
     
-    require_once "vendor/autoload.php";
     
     // Create a simple "default" Doctrine ORM configuration for Annotations
-    //$path = array("pth/to/entities/files");
+    //$path = array("src");
     $isDevMode = true;
     $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
     // or if you prefer yaml or XML
@@ -16,7 +16,7 @@
     // database configuration parameters
     
     $conn = array(
-        'driver'   => 'pdo_mysql',
+        'driver'   => 'pdo_mysql',        
         'user'     => 'root',
         'password' => 'root89',
         'dbname'   => 'ripisha_db',

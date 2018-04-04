@@ -1,45 +1,45 @@
 <?php
-namespace src\Base;
+
 
 use Doctrine\ORM\Annotation as ORM;
 
 /**
- * @ORM\Entity @ORM\Table(name="transaction_tbl")
+ * @Entity @Table(name="transaction_tbl")
  */
 class Transaction
 {
     /**
-     * @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue
+     * @Id @Column(type="integer") @GeneratedValue
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @Column(type="string")
      */
     private $from;
     /**
-     * @ORM\Column(type="decimal")
+     * @Column(type="decimal")
      */
     private $amount;
     /**
-     * @ORM\Column(type="string", length=5)
+     * @Column(type="string", length=5)
      */
     private $currency;
     /**
-     * @ORM\ManyToOne(targetEntity="src\Base\Account", inversedBy="transactions")
-     * @ORM\JoinColumn(name="account_id")
+     * @ManyToOne(targetEntity="Account", inversedBy="transactions")
+     * @JoinColumn(name="account_id")
      */
     private $account;
     /**
-     * @ORM\ManyToOne(targetEntity="src\Base\AccountType", inversedBy="transactions")
-     * @ORM\JoinColumn(name="accountype")
+     * @ManyToOne(targetEntity="AccountType", inversedBy="transactions")
+     * @JoinColumn(name="accountype")
      */
     private $type;
     /**
-     * @ORM\Column(type="datetime")
+     * @Column(type="datetime")
      */
     private $transTime;
     /**
-     * @ORM\Column(type="boolean")
+     * @Column(type="boolean")
      */
     private $isCompleted;
 

@@ -1,12 +1,12 @@
 <?php
-namespace src\Base;
+
 
 use Doctrine\ORM\Annotation as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use src\Base\Transaction;
+use src\Transaction;
 /**
- * @ORM\Entity @ORM\Table(name="account_tbl")
+ * @Entity @Table(name="account_tbl")
  */
 class Account
 {
@@ -14,34 +14,34 @@ class Account
     {
         $this->transactions = new ArrayCollection();
     }  
-    /**ACCOUNT PROPERTIES */
+    
     /**
-     * @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue
+     * @Id @Column(type="integer") @GeneratedValue
      */
     private $id;
     /**
-     * @ORM\Column(type="string")
+     * @Column(type="string")
      */
     private $name;
     /**
-     * @ORM\Column(type="string")
+     * @Column(type="string")
      */
     private $identifier;
     /**
-     * @ORM\ManyToOne(targetEntity="src\Base\AccountType", inversedBy="accounts")
-     * @ORM\JoinColumn(name="accountype")
+     * @ManyToOne(targetEntity="AccountType", inversedBy="accounts")
+     * @JoinColumn(name="type")
      */
     private $type;
     /**
-     * @ORM\Column(type="string")
+     * @Column(type="string")
      */
     private $deviceID;
 
      /**
-     * @ORM\OneToMany(targetEntity=src\Base\Account, mappedBy="transact_id")
+     * @OneToMany(targetEntity="Transaction", mappedBy="transact_id")
      */
     private $transactions;
-    /**@ORM\Column(type="decimal") */
+    /**@Column(type="decimal") */
     private $balance;
 
     /**
