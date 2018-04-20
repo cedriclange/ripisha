@@ -3,6 +3,7 @@
  * Gets the messages(SMSs) sent by SMSsync as a POST request.
  *
  */
+
 function get_message()
 {
     $error = NULL;
@@ -20,6 +21,7 @@ function get_message()
         $error = 'The from variable was not set';
         
     }
+    
     /**
      * Get the SMS aka the message sent.
      */
@@ -259,8 +261,31 @@ function get_sms_delivery_report()
         $message_results = file_get_contents('php://input');
         write_message_to_file("message ".$message_results."\n\n");
     }
+} 
+//get transaction ID
+function getTransactionID($message)
+{
+    $pattern = '/\S+\.\S+\.((?!\:)\S)+/i';
+    preg_match($pattern,$message,$matches);
+    return  sizeof($matches) > 0 ? $matches[0]:"" ;
 }
- 
+//get From name
+function getFom($message) 
+{
+    $pattern = '/partir de((?!\.)(\S|\s))+/i';
+    preg_match($pattern,$message,$matches);
+    return sizeof($matches) > 0 ? preg_replace('/partir de\s+/',",$matches[0]:");
+}
+function getAmount($msg) {
+
+}
+function getCurrency($msg) {
+
+}
+function getBalance($msg)
+{
+
+}
 // Execute functions above
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
